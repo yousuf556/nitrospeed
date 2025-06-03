@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class traffic : MonoBehaviour
 {
     public float traffic_speed = 0;
@@ -12,6 +13,6 @@ public class traffic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward);
+        transform.Translate(Vector3.forward*Time.deltaTime*traffic_speed);
     }
 }

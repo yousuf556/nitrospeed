@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class car_movement : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class car_movement : MonoBehaviour
         {
             if (speed != 0)
             {
-                transform.Rotate(0, -speed, 0);
+                transform.Rotate(0, -speed*Time.deltaTime, 0);
                 Debug.Log("Turning left.speed: "+speed);
             }
         }
@@ -23,7 +24,7 @@ public class car_movement : MonoBehaviour
         {
             if (speed != 0)
             {
-                transform.Rotate(0, speed, 0);
+                transform.Rotate(0, speed * Time.deltaTime, 0);
                 Debug.Log("Turning right.speed: "+speed);
             }
         }
@@ -71,8 +72,32 @@ public class car_movement : MonoBehaviour
             }
         }
         transform.Translate(0, 0, speed * Time.deltaTime);
+
+        if (transform.position.z > 1580)
+        {
+            Vector3 newposition = new Vector3(transform.position.x, transform.position.y, -1400);
+            transform.position = newposition;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("hit to hui");
+        if (collision.gameObject.tag == "traffic")
+        {
+            SceneManager.LoadScene("background");
+            Debug.Log("tag wala bhi hai");
+        }
         
-    }     
+        
+        
+    }
+
+
+
+
+
+
 }
             
              
